@@ -11,7 +11,7 @@ export function processNextDayWeather(data: any) {
       temperatureResult = scanTemperature(data.temperature_2m); //scan if temperature exceeds set perameter.
    }
 
-   if(temperatureResult !== null){
+   if(temperatureResult == true){
       result = { //set return value, 
          result: true, //set as confirmed return
          type: 'Temperature' //type of reported weather condition 
@@ -30,17 +30,16 @@ export function processNextDayWeather(data: any) {
  * @param data JSON-format containing list with hourly temperatures.
  * @returns JSON-format with determined weather conditions.
  */
-export function scanTemperature(data: any) {
-   let result = null;
+export function scanTemperature(data: any) {        
 
-   for (const item in data) { //go through temperatures.
+   for (const item in data) { //go through temperatures.     
       if (data.hasOwnProperty(item)) {
          const temperature = data[item];
-         if(temperature > 25) {
-            result = temperature;
+         if(temperature >= 25) { // Return true immediately if any temperature is greater than 25
+            return true; 
          }
       }
    }
 
-   return result;
+   return false; // Return false if no temperature is greater than 25.
 };

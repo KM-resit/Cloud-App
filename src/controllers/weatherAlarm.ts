@@ -22,10 +22,8 @@ export const nextDayWeather = async (req: Request, res: Response) => {
 
         const processedData = await processNextDayWeather(data.hourly); //Send gathered data for processing and get weather report.     
 
-
         res.json(processedData); 
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while fetching the weather data.' });
     }
 };
-
