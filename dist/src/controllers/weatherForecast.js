@@ -23,6 +23,7 @@ const weatherForecast = (req, res) => __awaiter(void 0, void 0, void 0, function
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,windspeed_10m_max,winddirection_10m_dominant&timezone=auto&forecast_days=${days}`;
         const response = yield axios_1.default.get(url);
         const data = response.data;
+        console.log(data);
         res.json(data.daily);
     }
     catch (error) {

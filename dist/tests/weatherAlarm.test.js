@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const axios = require('axios');
+const alarmAxios = require('axios');
 const weatherAlarm = require('../src/controllers/weatherAlarm');
 describe('nextDayWeather', () => {
     it('should return weather report for no conditions met', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -22,7 +22,7 @@ describe('nextDayWeather', () => {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(axios, 'get').mockResolvedValue({
+        jest.spyOn(alarmAxios, 'get').mockResolvedValue({
             data: {
                 generationtime_ms: 1.278996467590332,
                 utc_offset_seconds: -14400,
@@ -80,7 +80,7 @@ describe('nextDayWeather', () => {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(axios, 'get').mockResolvedValue({
+        jest.spyOn(alarmAxios, 'get').mockResolvedValue({
             data: {
                 generationtime_ms: 1.278996467590332,
                 utc_offset_seconds: -14400,
@@ -139,7 +139,7 @@ describe('nextDayWeather', () => {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(axios, 'get').mockResolvedValue({
+        jest.spyOn(alarmAxios, 'get').mockResolvedValue({
             data: {
                 generationtime_ms: 1.278996467590332,
                 utc_offset_seconds: -14400,
@@ -198,7 +198,7 @@ describe('weatherAlarm', () => {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(axios, 'get').mockResolvedValue({
+        jest.spyOn(alarmAxios, 'get').mockResolvedValue({
             data: {
                 generationtime_ms: 1.278996467590332,
                 utc_offset_seconds: -14400,
@@ -262,7 +262,7 @@ describe('weatherAlarm', () => {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(axios, 'get').mockResolvedValue({
+        jest.spyOn(alarmAxios, 'get').mockResolvedValue({
             data: {
                 generationtime_ms: 1.278996467590332,
                 utc_offset_seconds: -14400,
@@ -326,7 +326,7 @@ describe('weatherAlarm', () => {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(axios, 'get').mockResolvedValue({
+        jest.spyOn(alarmAxios, 'get').mockResolvedValue({
             data: {
                 generationtime_ms: 1.278996467590332,
                 utc_offset_seconds: -14400,
@@ -390,7 +390,7 @@ describe('weatherAlarm', () => {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(axios, 'get').mockResolvedValue({
+        jest.spyOn(alarmAxios, 'get').mockResolvedValue({
             data: {
                 generationtime_ms: 1.278996467590332,
                 utc_offset_seconds: -14400,

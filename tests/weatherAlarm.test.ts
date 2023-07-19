@@ -1,4 +1,4 @@
-const axios = require('axios');
+const alarmAxios = require('axios');
 const weatherAlarm = require('../src/controllers/weatherAlarm');
 
 describe('nextDayWeather', () => {
@@ -13,7 +13,7 @@ describe('nextDayWeather', () => {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(axios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+        jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
             data: {
               generationtime_ms: 1.278996467590332,
               utc_offset_seconds: -14400,
@@ -75,7 +75,7 @@ describe('nextDayWeather', () => {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(axios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+        jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
             data: {
               generationtime_ms: 1.278996467590332,
               utc_offset_seconds: -14400,
@@ -138,7 +138,7 @@ describe('nextDayWeather', () => {
           json: jest.fn(),
           status: jest.fn().mockReturnThis(),
       };
-      jest.spyOn(axios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+      jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
           data: {
             generationtime_ms: 1.278996467590332,
             utc_offset_seconds: -14400,
@@ -201,7 +201,7 @@ describe('weatherAlarm', () => {
         json: jest.fn(),
         status: jest.fn().mockReturnThis(),
       };
-      jest.spyOn(axios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+      jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
         data: {
           generationtime_ms: 1.278996467590332,
           utc_offset_seconds: -14400,
@@ -260,7 +260,7 @@ describe('weatherAlarm', () => {
       expect(res.status).not.toHaveBeenCalledWith(500);
     });
 
-    it('should return weather report for hail', async () => {
+  it('should return weather report for hail', async () => {
     // Mock request and response objects
       const req = {
         query: {
@@ -272,7 +272,7 @@ describe('weatherAlarm', () => {
         json: jest.fn(),
         status: jest.fn().mockReturnThis(),
       };
-      jest.spyOn(axios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+      jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
         data: {
           generationtime_ms: 1.278996467590332,
           utc_offset_seconds: -14400,
@@ -343,7 +343,7 @@ describe('weatherAlarm', () => {
         json: jest.fn(),
         status: jest.fn().mockReturnThis(),
       };
-      jest.spyOn(axios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+      jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
         data: {
           generationtime_ms: 1.278996467590332,
           utc_offset_seconds: -14400,
@@ -414,7 +414,7 @@ describe('weatherAlarm', () => {
         json: jest.fn(),
         status: jest.fn().mockReturnThis(),
       };
-      jest.spyOn(axios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+      jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
         data: {
           generationtime_ms: 1.278996467590332,
           utc_offset_seconds: -14400,
