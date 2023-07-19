@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { nextDayWeather, currentWeather } from './controllers/weatherAlarm';
+import { weatherHistory } from './controllers/weatherHistory';
 /**
  * Application startup 
  */
@@ -27,6 +28,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.get('/nextDayWeather', nextDayWeather);
 app.get('/currentWeather', currentWeather);
+app.get('/weatherHistory', weatherHistory);
 
 const server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
