@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1689768752049" clover="3.2.0">
-  <project timestamp="1689768752049" name="All files">
-    <metrics statements="78" coveredstatements="76" conditionals="28" coveredconditionals="24" methods="8" coveredmethods="8" elements="114" coveredelements="108" complexity="0" loc="78" ncloc="78" packages="3" files="4" classes="4"/>
+<coverage generated="1689843950275" clover="3.2.0">
+  <project timestamp="1689843950275" name="All files">
+    <metrics statements="79" coveredstatements="77" conditionals="30" coveredconditionals="26" methods="8" coveredmethods="8" elements="117" coveredelements="111" complexity="0" loc="79" ncloc="79" packages="3" files="4" classes="4"/>
     <package name="controllers">
-      <metrics statements="33" coveredstatements="31" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <metrics statements="34" coveredstatements="32" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
       <file name="weatherAlarm.ts" path="C:\Users\WackyMachine\Documents\GitHub\Cloud-App\src\controllers\weatherAlarm.ts">
         <metrics statements="21" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="11" count="1" type="stmt"/>
@@ -29,19 +29,20 @@
         <line num="46" count="0" type="stmt"/>
       </file>
       <file name="weatherForecast.ts" path="C:\Users\WackyMachine\Documents\GitHub\Cloud-App\src\controllers\weatherForecast.ts">
-        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
+        <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="17" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
       </file>
     </package>
     <package name="controllers.hourPrediction">
@@ -52,9 +53,9 @@
         <line num="9" count="5" type="stmt"/>
         <line num="11" count="5" type="stmt"/>
         <line num="12" count="5" type="stmt"/>
-        <line num="13" count="75" type="stmt"/>
-        <line num="14" count="75" type="stmt"/>
-        <line num="16" count="75" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="60" type="stmt"/>
+        <line num="14" count="60" type="stmt"/>
+        <line num="16" count="60" type="cond" truecount="2" falsecount="0"/>
         <line num="17" count="5" type="stmt"/>
         <line num="18" count="5" type="stmt"/>
         <line num="21" count="5" type="stmt"/>

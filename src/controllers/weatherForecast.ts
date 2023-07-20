@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { cityFetch } from './geoAPI/cityLocation';
 import axios from 'axios';
 
 /**
@@ -8,13 +9,22 @@ import axios from 'axios';
  */
 export const weatherForecast = async (req: Request, res: Response) => {
     try {
-        const { longitude, latitude, days } = req.query;
+        const city: string = req.query.city as string; // Specify the type as string
+        const days: number = parseInt(req.query.days as string); // Specify the type as number
 
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,windspeed_10m_max,winddirection_10m_dominant&timezone=auto&forecast_days=${days}`;
+        const cityLocation = await cityFetch(city);
+
+        if (typeof cityLocation === 'string') {
+            throw new Error(cityLocation); // Re-throw the error as an exception
+        }
+
+        const { longitude, latitude } = cityLocation;
+
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&daily=temperature_2m_max,temperature_2m_min,windspeed_10m_max,winddirection_10m_dominant&timezone=auto&forecast_days=${days}`;
         const response = await axios.get(url);
         const data = response.data;
   
-        res.json(data.daily); 
+       res.json(data.daily);
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while fetching the weather data.' });
     }

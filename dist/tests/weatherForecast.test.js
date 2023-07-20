@@ -110,5 +110,22 @@ describe('weatherForecast', () => {
         expect(res.json).toHaveBeenCalledWith(expectedResponse);
         expect(res.status).not.toHaveBeenCalledWith(500);
     }));
+    it('should return weather forecast of 9 days', () => __awaiter(void 0, void 0, void 0, function* () {
+        forecastAxios.get.mockRejectedValue(new Error('Simulated error'));
+        const req = {
+            query: {
+                longitude: 0,
+                latitude: 0,
+                days: 5,
+            },
+        };
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn(),
+        };
+        yield weatherForecast.weatherForecast(req, res);
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.json).toHaveBeenCalledWith({ error: 'An error occurred while fetching the weather data.' });
+    }));
 });
 //# sourceMappingURL=weatherForecast.test.js.map

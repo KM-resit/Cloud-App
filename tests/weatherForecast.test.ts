@@ -1,19 +1,35 @@
-const forecastAxios = require('axios');
 const weatherForecast = require('../src/controllers/weatherForecast');
+const forecastAxios = require('axios');
+const axios = require('axios');
+const { cityFetch } = require('../src/controllers/geoAPI/cityLocation');
 
+jest.mock('axios', () => ({
+    get: jest.fn()
+}));
+
+jest.mock('../src/controllers/geoAPI/cityLocation', () => ({
+    cityFetch: jest.fn()
+}));
+
+// Mock the cityFetch function
 describe('weatherForecast', () => {
     it('should return weather forecast of 9 days', async () => {
         const req = {
             query: {
-              latitude: 40.710335,
-              longitude: -73.99307,
+              city: 'Amsterdam',
+              days: '9',
             },
         };
         const res = {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(forecastAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+        // Mock the resolved value for cityFetch
+        cityFetch.mockResolvedValue({
+            longitude: 6.9,
+            latitude: 52.78,
+        });
+        axios.get.mockResolvedValue({ //intervene on URL request to create fixed responce
             data: {
                 latitude: 52.78,
                 longitude: 6.9,
@@ -105,7 +121,7 @@ describe('weatherForecast', () => {
         expect(res.status).not.toHaveBeenCalledWith(500);
     });
 
-    it('should return weather forecast of 9 days', async () => {
+    it('should return error for the weather forecast', async () => {
         forecastAxios.get.mockRejectedValue(new Error('Simulated error'));
 
         const req = {
@@ -125,4 +141,27 @@ describe('weatherForecast', () => {
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalledWith({ error: 'An error occurred while fetching the weather data.' });
     });
+
+    it('should return an error if cityFetch returns a string', async () => {
+        // Mock the resolved value for cityFetch to return a string
+        cityFetch.mockResolvedValue('Error fetching city location');
+
+        const req = {
+            query: {
+                city: 'Amsterdam',
+                days: '9',
+            },
+        };
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn(),
+        };
+
+        await weatherForecast.weatherForecast(req, res);
+
+        expect(cityFetch).toHaveBeenCalledWith('Amsterdam');
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.json).toHaveBeenCalledWith({ error: 'An error occurred while fetching the weather data.' });
+    });
+
 });
