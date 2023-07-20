@@ -8,21 +8,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const forecastAxios = require('axios');
 const weatherForecast = require('../src/controllers/weatherForecast');
+const forecastAxios = require('axios');
+const axios = require('axios');
+const { cityFetch } = require('../src/controllers/geoAPI/cityLocation');
+jest.mock('axios', () => ({
+    get: jest.fn()
+}));
+jest.mock('../src/controllers/geoAPI/cityLocation', () => ({
+    cityFetch: jest.fn()
+}));
 describe('weatherForecast', () => {
     it('should return weather forecast of 9 days', () => __awaiter(void 0, void 0, void 0, function* () {
         const req = {
             query: {
-                latitude: 40.710335,
-                longitude: -73.99307,
+                city: 'Amsterdam',
+                days: '9',
             },
         };
         const res = {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(forecastAxios, 'get').mockResolvedValue({
+        cityFetch.mockResolvedValue({
+            longitude: 6.9,
+            latitude: 52.78,
+        });
+        axios.get.mockResolvedValue({
             data: {
                 latitude: 52.78,
                 longitude: 6.9,
@@ -110,7 +122,7 @@ describe('weatherForecast', () => {
         expect(res.json).toHaveBeenCalledWith(expectedResponse);
         expect(res.status).not.toHaveBeenCalledWith(500);
     }));
-    it('should return weather forecast of 9 days', () => __awaiter(void 0, void 0, void 0, function* () {
+    it('should return error for the weather forecast', () => __awaiter(void 0, void 0, void 0, function* () {
         forecastAxios.get.mockRejectedValue(new Error('Simulated error'));
         const req = {
             query: {
@@ -124,6 +136,23 @@ describe('weatherForecast', () => {
             json: jest.fn(),
         };
         yield weatherForecast.weatherForecast(req, res);
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.json).toHaveBeenCalledWith({ error: 'An error occurred while fetching the weather data.' });
+    }));
+    it('should return an error if cityFetch returns a string', () => __awaiter(void 0, void 0, void 0, function* () {
+        cityFetch.mockResolvedValue('Error fetching city location');
+        const req = {
+            query: {
+                city: 'Amsterdam',
+                days: '9',
+            },
+        };
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn(),
+        };
+        yield weatherForecast.weatherForecast(req, res);
+        expect(cityFetch).toHaveBeenCalledWith('Amsterdam');
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalledWith({ error: 'An error occurred while fetching the weather data.' });
     }));

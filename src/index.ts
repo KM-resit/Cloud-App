@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import { nextDayWeather, currentWeather } from './controllers/weatherAlarm';
 import { weatherForecast } from './controllers/weatherForecast';
+import { weatherHistory, weatherHistoryPerMonth } from './controllers/weatherHistory';
 /**
  * Application startup 
  */
@@ -29,6 +30,8 @@ const port = 3000;
 app.get('/nextDayWeather', nextDayWeather);
 app.get('/currentWeather', currentWeather);
 app.get('/weatherForecast', weatherForecast); // will allow minimum forecast 1 day, max forecast 16 days
+app.get('/weatherHistory', weatherHistory);
+app.get('/weatherHistoryPerMonth', weatherHistoryPerMonth);
 
 const server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
