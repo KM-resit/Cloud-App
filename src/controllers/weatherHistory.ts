@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import axios from 'axios';
+import { cityFetch } from './geoAPI/cityLocation';
+import { calculatePerMonth } from './historyCalculator/monthCalculator';
+import { determineDates } from './historyCalculator/dateCalculator';
 
 /**
  * weatherForecast - responsible for analysing location and respond with a forecast of the given amount of days.
@@ -8,15 +11,53 @@ import axios from 'axios';
  */
 export const weatherHistory = async (req: Request, res: Response) => {
     try {
-        const { longitude, latitude } = req.query;
+        const city: string = req.query.city as string; // Specify the type as string
 
-        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=2003-07-14&end_date=2023-07-14&daily=temperature_2m_max,temperature_2m_mean&timezone=GMT`;
-        
+        const cityLocation = await cityFetch(city);
+
+        if (typeof cityLocation === 'string') {
+            throw new Error(cityLocation); // Re-throw the error as an exception
+        }
+
+        const today = new Date();
+        const date = determineDates(today);
+
+        const { longitude, latitude } = cityLocation;
+
+        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean&timezone=GMT`;
         const response = await axios.get(url);
         const data = response.data;
   
-        res.json(data.daily); 
+        res.json(data); 
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while fetching the weather data.' });
     }
 };
+
+export const weatherHistoryPerMonth = async (req: Request, res: Response) => {
+    try {
+        const city: string = req.query.city as string; // Specify the type as string
+
+        const cityLocation = await cityFetch(city);
+
+        if (typeof cityLocation === 'string') {
+            throw new Error(cityLocation); // Re-throw the error as an exception
+        }
+
+        const today = new Date();
+        const date = determineDates(today);
+
+        const { longitude, latitude } = cityLocation;
+
+        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean&timezone=GMT`;
+        const response = await axios.get(url);
+        const data = response.data;
+        
+        const result = await calculatePerMonth(data.daily);
+  
+        res.json(result); 
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while fetching the weather data.' });
+    }
+};
+
