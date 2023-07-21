@@ -27,7 +27,7 @@ const weatherHistory = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const today = new Date();
         const date = (0, dateCalculator_1.determineDates)(today);
         const { longitude, latitude } = cityLocation;
-        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean&timezone=GMT`;
+        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean,precipitation_sum&timezone=GMT`;
         const response = yield axios_1.default.get(url);
         const data = response.data;
         res.json(data);
@@ -47,7 +47,7 @@ const weatherHistoryPerMonth = (req, res) => __awaiter(void 0, void 0, void 0, f
         const today = new Date();
         const date = (0, dateCalculator_1.determineDates)(today);
         const { longitude, latitude } = cityLocation;
-        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean&timezone=GMT`;
+        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean,precipitation_sum&timezone=GMT`;
         const response = yield axios_1.default.get(url);
         const data = response.data;
         const result = yield (0, monthCalculator_1.calculatePerMonth)(data.daily);

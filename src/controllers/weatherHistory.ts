@@ -24,7 +24,7 @@ export const weatherHistory = async (req: Request, res: Response) => {
 
         const { longitude, latitude } = cityLocation;
 
-        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean&timezone=GMT`;
+        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean,precipitation_sum&timezone=GMT`;
         const response = await axios.get(url);
         const data = response.data;
   
@@ -35,7 +35,7 @@ export const weatherHistory = async (req: Request, res: Response) => {
 };
 
 /**
- * weatherHistoryPerMonth - responsible for analysing the historical dat from a location and respond with daily data of the given amount of years.
+ * weatherHistoryPerMonth - responsible for analysing the historical dat from a location and respond with montly data of the given amount of years.
  * @param data in weatherForecast format from HTTP-request. Gather the city name. 
  * @returns Weather history object
  */
@@ -54,7 +54,7 @@ export const weatherHistoryPerMonth = async (req: Request, res: Response) => {
 
         const { longitude, latitude } = cityLocation;
 
-        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean&timezone=GMT`;
+        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean,precipitation_sum&timezone=GMT`;
         const response = await axios.get(url);
         const data = response.data;
         
