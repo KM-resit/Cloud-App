@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import axios from 'axios';
 import { cityFetch } from './geoAPI/cityLocation';
 import { calculatePerMonth } from './historyCalculator/monthCalculator';
 import { determineDates } from './historyCalculator/dateCalculator';
+import axios from 'axios';
 
 /**
  * weatherHistory - responsible for analysing the historical dat from a location and respond with daily data of the given amount of years.
@@ -20,7 +20,7 @@ export const weatherHistory = async (req: Request, res: Response) => {
         }
 
         const today = new Date();
-        const date = determineDates(today);
+        const date = determineDates(today); // Set dates for the url request.
 
         const { longitude, latitude } = cityLocation;
 
@@ -50,15 +50,17 @@ export const weatherHistoryPerMonth = async (req: Request, res: Response) => {
         }
 
         const today = new Date();
-        const date = determineDates(today);
+        const date = determineDates(today); // Set dates for the url request.
 
         const { longitude, latitude } = cityLocation;
 
         const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean,precipitation_sum&timezone=GMT`;
         const response = await axios.get(url);
         const data = response.data;
-        
-        const result = await calculatePerMonth(data.daily);
+
+        console.log(data);
+
+        const result = await calculatePerMonth(data.daily); // Compact daily information into monthly
   
         res.json(result); 
     } catch (error) {

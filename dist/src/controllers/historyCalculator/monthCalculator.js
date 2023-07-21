@@ -29,7 +29,6 @@ function calculatePerMonth(data) {
             precipitation: averagePrecipitation,
         };
     }
-    console.log(result);
     return result;
 }
 exports.calculatePerMonth = calculatePerMonth;

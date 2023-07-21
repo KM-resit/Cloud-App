@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.weatherHistoryPerMonth = exports.weatherHistory = void 0;
-const axios_1 = __importDefault(require("axios"));
 const cityLocation_1 = require("./geoAPI/cityLocation");
 const monthCalculator_1 = require("./historyCalculator/monthCalculator");
 const dateCalculator_1 = require("./historyCalculator/dateCalculator");
+const axios_1 = __importDefault(require("axios"));
 const weatherHistory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const city = req.query.city;
@@ -50,6 +50,7 @@ const weatherHistoryPerMonth = (req, res) => __awaiter(void 0, void 0, void 0, f
         const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&start_date=${date.startDate}&end_date=${date.endDate}&daily=temperature_2m_mean,precipitation_sum&timezone=GMT`;
         const response = yield axios_1.default.get(url);
         const data = response.data;
+        console.log(data);
         const result = yield (0, monthCalculator_1.calculatePerMonth)(data.daily);
         res.json(result);
     }
