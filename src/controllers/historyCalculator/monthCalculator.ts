@@ -1,5 +1,8 @@
-export function calculatePerMonth(data: any) {
+interface monthlyAverage {
+    [year: number]: any;
+  }
 
+export function calculatePerMonth(data: any) {
     // Create an object to store temperature values grouped by month
     const byYearAndMonth: { [year: number]: { [month: number]: number[] } } = {};
   
@@ -22,17 +25,29 @@ export function calculatePerMonth(data: any) {
         
     }
 
-    const result = {};
+    const result : monthlyAverage = {};
     for (const year in byYearAndMonth){
-        const averageTemperature = calculateTempurature(byYearAndMonth);
-        //result.push({ year: parseInt(year), averageTemperature});
+       const averageTemperature = calculateTempurature(byYearAndMonth[year]);
+       result[parseInt(year)] = averageTemperature;
     }
 
-    console.log(byYearAndMonth);
-    console.log(result);
+    return result;
 }
 
-export function calculateTempurature(data: any){
-    console.log(data);
+export function calculateTempurature(data: any) : monthlyAverage {
+    const averages: monthlyAverage = {};    
+    // console.log('entry begin');
+    // console.log(data);
+    // console.log('entry end');
+
+    for(const month in data) {
+        const temperatures = data[month];
+        const sum = temperatures.reduce((acc: number, temp: number) => acc + temp, 0);
+        const average = sum / temperatures.length;    
+        const averageOneDecimal = parseFloat(average.toFixed(1)); // Limit average to one decimal place
+        averages[parseInt(month)] = averageOneDecimal;
+    }
+
+    return averages;
 
 }

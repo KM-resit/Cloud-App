@@ -18,7 +18,7 @@ export function determineDates(data: Date) {
     }
 
     const startDate = new Date(data);
-    startDate.setFullYear(startDate.getFullYear() - 2); // tempary set to 2 years
+    startDate.setFullYear(startDate.getFullYear() - 20); 
     startDate.setDate(1);
 
     const result = {
