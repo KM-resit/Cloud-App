@@ -1,5 +1,4 @@
 # Cloud-App
-# Cloud-App
 
 The Weather API is a tool for retrieving and analyzing weather data for various locations. It allows users to fetch weather data for a specific city, providing detailed insights into temperature and precipitation trends over a given period. The API serves as a valuable resource users who require historical and forecast weather data to study plan according to climate patterns or weather forecasts.
 
