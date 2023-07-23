@@ -143,7 +143,7 @@ describe('processWeatherConditions', () => {
 });
 
 describe('processData', () => {
-    it('hould return correct weather report for the current hour', () => {
+  it('hould return correct weather report for the current hour', () => {
         const input = {
             latitude: 40.710335,
             longitude: -73.99307,
@@ -196,6 +196,5 @@ describe('processData', () => {
             timezone: 'GMT',
             time: `${currentHourInGMT + 2}:00`
           });
-    });
-
   });
+});
