@@ -58,10 +58,10 @@ export const weatherHistoryPerMonth = async (req: Request, res: Response) => {
         const response = await axios.get(url);
         const data = response.data;
 
-        console.log(data);
-
         const result = await calculatePerMonth(data.daily); // Compact daily information into monthly
-  
+
+        console.log(result);
+        
         res.json(result); 
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while fetching the weather data.' });
