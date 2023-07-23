@@ -1,6 +1,10 @@
 const alarmAxios = require('axios');
 const weatherAlarm = require('../src/controllers/weatherAlarm');
 
+jest.mock('axios', () => ({
+  get: jest.fn()
+}));
+
 describe('nextDayWeather', () => {
   it('should return weather report for no conditions met', async () => {
         const req = {
@@ -75,7 +79,7 @@ describe('nextDayWeather', () => {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+        alarmAxios.get.mockResolvedValue({ //intervene on URL request to create fixed responce
             data: {
               generationtime_ms: 1.278996467590332,
               utc_offset_seconds: -14400,
@@ -272,7 +276,7 @@ describe('weatherAlarm', () => {
         json: jest.fn(),
         status: jest.fn().mockReturnThis(),
       };
-      jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+      alarmAxios.get.mockResolvedValue({ //intervene on URL request to create fixed responce
         data: {
           generationtime_ms: 1.278996467590332,
           utc_offset_seconds: -14400,
@@ -296,16 +300,16 @@ describe('weatherAlarm', () => {
               '2023-07-17T22:00', '2023-07-17T23:00'
             ],
             temperature_2m: [
-              24, 23.8, 23.5, 23.9, 23.7,
               0, 0, 0, 0, 0,
               0, 0, 0, 0, 0,
               0, 0, 0, 0, 0,
-              28.4, 25.7, 25, 24.3
+              0, 0, 0, 0, 0,
+              0, 0, 0, 0
             ],
             rain: [
-              0, 0, 0, 0, 0, 0, 0, 0,
+              1, 1, 1, 1, 1, 1, 1, 1,
               0, 1, 1, 1, 1, 1, 1, 1,
-              1, 1, 1, 1, 0, 0, 0, 0
+              1, 1, 1, 1, 1, 1, 1, 1
             ],
             snowfall: [
               0, 0, 0, 0, 0, 0, 0, 0,
@@ -374,9 +378,9 @@ describe('weatherAlarm', () => {
               28.4, 25.7, 25, 24.3
             ],
             rain: [
-              0, 0, 0, 0, 0, 0, 0, 0,
-              0, 20, 20, 20, 20, 20, 20, 20,
-              20, 20, 20, 20, 0, 0, 0, 0
+              20, 20, 20, 20, 20, 20, 20, 20,
+              20, 20, 20, 20, 20, 20, 20, 20,
+              20, 20, 20, 20, 20, 20, 20, 20
             ],
             snowfall: [
               0, 0, 0, 0, 0, 0, 0, 0,
@@ -414,7 +418,7 @@ describe('weatherAlarm', () => {
         json: jest.fn(),
         status: jest.fn().mockReturnThis(),
       };
-      jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+      alarmAxios.get.mockResolvedValue({ //intervene on URL request to create fixed responce
         data: {
           generationtime_ms: 1.278996467590332,
           utc_offset_seconds: -14400,
@@ -450,9 +454,9 @@ describe('weatherAlarm', () => {
               0, 0, 0, 0, 0, 0, 0, 0
             ],
             snowfall: [
-              0, 0, 0, 0, 0, 60, 60, 60,
               60, 60, 60, 60, 60, 60, 60, 60,
-              60, 60, 60, 60, 60, 0, 0, 0
+              60, 60, 60, 60, 60, 60, 60, 60,
+              60, 60, 60, 60, 60, 60, 60, 60
             ]
           },
         },

@@ -45,7 +45,7 @@ export function processWeatherConditions(ID: number, data: any) {
             timezone: 'GMT',
             time: `${ID - 1}:00`
         };
-    } else if (data.rain[ID] > 0 && (data.temperature_2m[ID] <= 0)) {
+    } else if (data.rain[ID] >= 0.1 && (data.temperature_2m[ID] <= 0)) {
         weatherReport = {
             report: 'Hail',
             timezone: 'GMT',

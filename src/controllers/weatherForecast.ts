@@ -23,6 +23,7 @@ export const weatherForecast = async (req: Request, res: Response) => {
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${cityLocation.latitude}&longitude=${cityLocation.longitude}&daily=temperature_2m_max,temperature_2m_min,windspeed_10m_max,winddirection_10m_dominant&timezone=auto&forecast_days=${days}`;
         const response = await axios.get(url);
         const data = response.data;
+        console.log(data.daily);
   
        res.json(data.daily);
     } catch (error) {
