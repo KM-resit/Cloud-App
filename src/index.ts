@@ -7,6 +7,7 @@ import { weatherHistory, weatherHistoryPerMonth } from './controllers/weatherHis
  */
 const app = express();
 const cors = require('cors');
+const port = process.env.PORT || 3000;
 
 const corsOptions = {
     origin: "*",
@@ -17,11 +18,9 @@ const corsOptions = {
   
 app.use(cors(corsOptions));
 
-const port = 3000;
-
-// app.get('/', (req: Request, res: Response) => {
-//     res.send('Hello, World!');
-// });
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hello, World!');
+});
 
 // app.listen(port, () => {
 //     console.log(`Server is running on port ${port}`);

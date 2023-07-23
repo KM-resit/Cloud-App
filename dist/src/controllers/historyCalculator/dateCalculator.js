@@ -21,7 +21,7 @@ function determineDates(data) {
         }
     }
     const startDate = new Date(data);
-    startDate.setFullYear(startDate.getFullYear() - 2);
+    startDate.setFullYear(startDate.getFullYear() - 20);
     startDate.setDate(1);
     const result = {
         endDate: endDate.toISOString().split('T')[0],

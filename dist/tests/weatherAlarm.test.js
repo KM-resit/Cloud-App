@@ -69,7 +69,9 @@ describe('nextDayWeather', () => {
         expect(res.json).toHaveBeenCalledWith(expectedResponse);
         expect(res.status).not.toHaveBeenCalledWith(500);
     }));
-    it('should return weather report for heat conditions', () => __awaiter(void 0, void 0, void 0, function* () {
+});
+describe('weatherAlarm', () => {
+    it('should return weather report for no extreme weather conditions', () => __awaiter(void 0, void 0, void 0, function* () {
         const req = {
             query: {
                 latitude: 40.710335,
@@ -90,40 +92,45 @@ describe('nextDayWeather', () => {
                 hourly_units: { time: 'iso8601', temperature_2m: '°C', rain: 'mm', snowfall: 'cm' },
                 hourly: {
                     time: [
-                        '2023-07-18T00:00', '2023-07-18T01:00',
-                        '2023-07-18T02:00', '2023-07-18T03:00',
-                        '2023-07-18T04:00', '2023-07-18T05:00',
-                        '2023-07-18T06:00', '2023-07-18T07:00',
-                        '2023-07-18T08:00', '2023-07-18T09:00',
-                        '2023-07-18T10:00', '2023-07-18T11:00',
-                        '2023-07-18T12:00', '2023-07-18T13:00',
-                        '2023-07-18T14:00', '2023-07-18T15:00',
-                        '2023-07-18T16:00', '2023-07-18T17:00',
-                        '2023-07-18T18:00', '2023-07-18T19:00',
-                        '2023-07-18T20:00', '2023-07-18T21:00',
-                        '2023-07-18T22:00', '2023-07-18T23:00'
+                        '2023-07-17T00:00', '2023-07-17T01:00',
+                        '2023-07-17T02:00', '2023-07-17T03:00',
+                        '2023-07-17T04:00', '2023-07-17T05:00',
+                        '2023-07-17T06:00', '2023-07-17T07:00',
+                        '2023-07-17T08:00', '2023-07-17T09:00',
+                        '2023-07-17T10:00', '2023-07-17T11:00',
+                        '2023-07-17T12:00', '2023-07-17T13:00',
+                        '2023-07-17T14:00', '2023-07-17T15:00',
+                        '2023-07-17T16:00', '2023-07-17T17:00',
+                        '2023-07-17T18:00', '2023-07-17T19:00',
+                        '2023-07-17T20:00', '2023-07-17T21:00',
+                        '2023-07-17T22:00', '2023-07-17T23:00'
                     ],
                     temperature_2m: [
-                        13, 12.7, 12.5, 12.4, 12.5, 13.2,
-                        14.6, 16.2, 17.9, 19.4, 20.7, 21.6,
-                        22.2, 23.7, 24.4, 25.5, 23.2, 21.5,
-                        20.8, 18.4, 16.8, 15.8, 15.2, 14.
+                        24, 23.8, 23.5, 23.9, 23.7,
+                        0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0,
+                        28.4, 25.7, 25, 24.3
                     ],
-                    soil_temperature_54cm: [
-                        17.7, 17.7, 17.6, 17.6,
-                        17.5, 17.5, 17.4, 17.3,
-                        17.3, 17.3, 17.2, 17.2,
-                        17.2, 17.2, 17.2, 17.3,
-                        17.3, 17.3, 17.4, 17.4,
-                        17.5, 17.5, 17.5, 17.5
+                    rain: [
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0
+                    ],
+                    snowfall: [
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0
                     ]
                 },
             },
         });
-        yield weatherAlarm.nextDayWeather(req, res);
+        yield weatherAlarm.currentWeather(req, res);
+        const currentHourInGMT = new Date().getUTCHours();
         const expectedResponse = {
-            result: true,
-            type: "Temperature",
+            report: 'null',
+            timezone: 'GMT',
+            time: `${currentHourInGMT + 2}:00`,
         };
         expect(res.json).toHaveBeenCalledWith(expectedResponse);
         expect(res.status).not.toHaveBeenCalledWith(500);
