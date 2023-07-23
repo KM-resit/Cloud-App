@@ -141,6 +141,22 @@
         <line num="82" count="36" type="stmt"/>
         <line num="85" count="5" type="stmt"/>
       </file>
+      <file name="weatherForecast.ts" path="C:\Users\WackyMachine\Documents\GitHub\Cloud-App\src\controllers\weatherForecast.ts">
+        <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="17" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+      </file>
     </package>
     <package name="controllers.hourPrediction">
       <metrics statements="24" coveredstatements="24" conditionals="14" coveredconditionals="12" methods="2" coveredmethods="2"/>

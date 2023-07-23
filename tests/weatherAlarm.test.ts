@@ -1,5 +1,9 @@
-const axios = require('axios');
+const alarmAxios = require('axios');
 const weatherAlarm = require('../src/controllers/weatherAlarm');
+
+jest.mock('axios', () => ({
+  get: jest.fn()
+}));
 
 describe('nextDayWeather', () => {
   it('should return weather report for no conditions met', async () => {
@@ -13,7 +17,7 @@ describe('nextDayWeather', () => {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
         };
-        jest.spyOn(axios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+        jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
             data: {
               generationtime_ms: 1.278996467590332,
               utc_offset_seconds: -14400,
@@ -201,7 +205,7 @@ describe('weatherAlarm', () => {
         json: jest.fn(),
         status: jest.fn().mockReturnThis(),
       };
-      jest.spyOn(axios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
+      jest.spyOn(alarmAxios, 'get').mockResolvedValue({ //intervene on URL request to create fixed responce
         data: {
           generationtime_ms: 1.278996467590332,
           utc_offset_seconds: -14400,

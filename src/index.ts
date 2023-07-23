@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { nextDayWeather, currentWeather } from './controllers/weatherAlarm';
+import { weatherForecast } from './controllers/weatherForecast';
 import { weatherHistory, weatherHistoryPerMonth } from './controllers/weatherHistory';
 /**
  * Application startup 
@@ -27,6 +28,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.get('/nextDayWeather', nextDayWeather);
 app.get('/currentWeather', currentWeather);
+app.get('/weatherForecast', weatherForecast); // will allow minimum forecast 1 day, max forecast 16 days
 app.get('/weatherHistory', weatherHistory);
 app.get('/weatherHistoryPerMonth', weatherHistoryPerMonth);
 
