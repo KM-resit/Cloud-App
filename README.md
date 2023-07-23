@@ -197,8 +197,24 @@ npm start
 
 - **Example Response:**
   ```json
+  This is a 2 day example:
   {
-    
+     "time": [
+        "2023-07-19",
+        "2023-07-20"
+     ],
+     "temperature_2m_max": [
+        19.5, 19.8
+     ],
+     "temperature_2m_min": [
+        14.9, 12.2
+     ],
+     "windspeed_10m_max": [
+        14.8, 9.1
+     ],
+     "winddirection_10m_dominant": [
+        280, 320
+     ]
   }
   ```
 
