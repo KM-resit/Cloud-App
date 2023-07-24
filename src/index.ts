@@ -1,10 +1,13 @@
 import express, { Request, Response } from 'express';
 import { nextDayWeather, currentWeather } from './controllers/weatherAlarm';
+import { weatherForecast } from './controllers/weatherForecast';
+import { weatherHistory, weatherHistoryPerMonth } from './controllers/weatherHistory';
 /**
  * Application startup 
  */
 const app = express();
 const cors = require('cors');
+const port = process.env.PORT || 3000;
 
 const corsOptions = {
     origin: "*",
@@ -14,8 +17,6 @@ const corsOptions = {
 
   
 app.use(cors(corsOptions));
-
-const port = 3000;
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello, World!');
@@ -27,6 +28,9 @@ app.get('/', (req: Request, res: Response) => {
 
 app.get('/nextDayWeather', nextDayWeather);
 app.get('/currentWeather', currentWeather);
+app.get('/weatherForecast', weatherForecast); // will allow minimum forecast 1 day, max forecast 16 days
+app.get('/weatherHistory', weatherHistory);
+app.get('/weatherHistoryPerMonth', weatherHistoryPerMonth);
 
 const server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
