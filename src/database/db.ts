@@ -8,10 +8,13 @@ const config = {
     port: 1433,
     database: "WeatherAppResit",
     authentication: {
-        type: "default"
+        type: "default" // azure-active-directory-default
     },
     options: {
         encrypt: true,
+        trustServerCertificate: true,
+        // rejectUnauthorized: false,
+        // ca: require('fs').readFileSync('').toString();
     },
 };
 
