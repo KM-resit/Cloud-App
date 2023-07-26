@@ -72,8 +72,8 @@ app.post("/database/register", async (req, res) => {
             return res.status(409).json({ message: "Username already exists" });
         }
 
-        const queryString = "INSERT INTO [dbo].[User] (username, password) VALUES (@username, @password)";
-        await request.input("username", username).input("password", password).query(queryString);
+        const queryString = "INSERT INTO [dbo].[User] (username, password) VALUES (@username1, @password1)";
+        await request.input("username1", username).input("password1", password).query(queryString);
 
         res.json({ message: true });
     } catch (err: any) {
